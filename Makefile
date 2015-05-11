@@ -22,7 +22,7 @@ build:
 
 install:
 	mkdir -p ${DESTDIR}/compilers
-	tar -C build -hcf - xtensa-lx106-elf | tar -C ${DESTDIR}/compilers -xf -
+	tar -C build -hcf - xtensa-lx106-elf | tar -C ${DESTDIR}/compilers -xvf -
 
 
 packages:
