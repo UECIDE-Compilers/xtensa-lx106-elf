@@ -1,5 +1,5 @@
-Source: esp8266
-Section: cores
+Source: xtensa
+Section: compilers
 XBSC-Family: esp8266
 Priority: extra
 Maintainer: Matt Jenkins <matt@majenko.co.uk>
@@ -8,7 +8,6 @@ Standards-Version: 3.9.4
 Homepage: http://chipkit.net
 
 Package: xtensa
-Architecture: all
-Section: compilers
+Architecture: linux-amd64 windows-i386 windows-amd64 darwin-amd64
 Description: XTensa Compiler for the ESP8266
 

@@ -14,3 +14,14 @@
 
 override_dh_builddeb:
 	dh_builddeb -- -Zgzip
+
+override_dh_strip:
+override_dh_perl:
+override_dh_installdocs:
+override_dh_installchangelogs:
+override_dh_link:
+override_dh_compress:
+override_dh_fixperms:
+override_dh_makeshlibs:
+override_dh_shlibdeps:
+

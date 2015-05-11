@@ -1,0 +1,76 @@
+name=xtensa-lx106-elf
+family=esp8266
+version=1
+revision=3
+description=XTensa Compiler for ESP8266
+
+optimize=-Os
+warnings=
+extra.flags=
+
+cflags=-G1024::-g::-O2::${warnings}::-ffunction-sections::-fdata-sections::-mno-smart-io::-mdebugger::-Wcast-align::-fno-short-double::${extra.flags}
+cppflags=-G1024::-g::-O2::${warnings}::-fno-exceptions::-ffunction-sections::-fdata-sections::-mno-smart-io::-mdebugger::-Wcast-align::-fno-short-double::${extra.flags}
+ldflags=${optimize}::-Wl,--gc-sections,-Map,${filename}.map::-mdebugger::-mno-peripheral-libs::-nostartfiles::${extra.flags}
+asflags=-O2::-g1::-Wa,--gdwarf-2::${warnings}::${extra.flags}
+
+gcc=${compiler.root}/bin/xtensa-lx106-elf-gcc
+gpp=${compiler.root}/bin/xtensa-lx106-elf-g++
+ar=${compiler.root}/bin/xtensa-lx106-elf-ar
+objcopy=${compiler.root}/bin/xtensa-lx106-elf-objcopy
+objdump=${compiler.root}/bin/xtensa-lx106-elf-objdump
+size=${compiler.root}/bin/xtensa-lx106-elf-size
+binhex=${compiler.root}/bin/xtensa-lx106-elf-bin2hex
+
+exe.extension=.elf
+
+
+compile.ar=${ar}::rcs::${library}::${object.name}
+compile.lss=${objdump}::-h::-S::${build.path}/${filename}.elf
+compile.size=${size}::${build.path}/${filename}.elf
+
+
+compiler.error=^(.+):(\d+):\d+: error: (.*)
+compiler.warning=^(.+):(\d+):\d+: warning: (.*)
+
+options.warnings.name=Warnings
+options.warnings.default=off
+options.warnings.on.name=Enable all warnings
+options.warnings.on.flags=-Wall
+options.warnings.err.name=Error on warnings
+options.warnings.err.flags=-Wall::-Werror
+options.warnings.off.name=Suppress warnings
+options.warnings.off.flags=-w
+
+compiler.size.regex=^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(.*)\s+(.*)$
+compiler.size.text=1
+compiler.size.rodata=2
+compiler.size.data=3
+compiler.size.bss=4
+
+
+
+
+ldflags=-nostdlib::-Wl,--no-check-sections::-Wl,-static::-Teagle.app.v6.ld
+
+flags=-D__ets__::-DICACHE_FLASH::-U__STRICT_ANSI__::-MMD::-mlongcalls::-mtext-section-literals
+
+cflags=-std=c99::-Wl,-El::-fno-inline-functions::-nostdlib::-Wpointer-arith::-Wno-implicit-function-declaration
+cppflags=-fno-rtti::-fno-exceptions::-std=c++11::
+asflags=-x::assembler-with-cpp::-g
+
+compile.c=${gcc}::-c::${source.name}::-o::${object.name}::${optimize}::${flags}::${cflags}::${core.flags}::${core.cflags}::${board.flags}::${board.cflags}::${option.flags}::${option.cflags}::${includes}::-I${core.root}/sdk/include
+compile.cpp=${gpp}::${optimize}::${flags}::${cppflags}::${core.flags}::${core.cppflags}::${board.flags}::${board.cppflags}::${option.flags}::${option.cppflags}::${includes}::-c::${source.name}::-o::${object.name}
+
+compile.S=${gcc}::-c::${source.name}::-o::${object.name}::${optimize}::${flags}::${asflags}::${core.flags}::${core.asflags}::${board.flags}::${board.asflags}::${option.flags}::${option.asflags}::${includes}
+
+compile.link=${gpp}::${ldflags}::${core.ldflags}::${board.ldflags}::-o::${build.path}/${filename}.elf::${object.filelist}::-L::${build.path}::-L${libraries.path}::-Wl,--start-group::${libraries}::-lm::-lc::-lgcc::-lhal::-lphy::-lnet80211::-llwip::-lwpa::-lmain::-lpp::-lsmartconfig::${extra.libs}::-Wl,--end-group
+
+
+#convert:
+#esptool -eo /tmp/build3272571092677525272.tmp/sketch_may11a.cpp.elf -bo /tmp/build3272571092677525272.tmp/sketch_may11a.cpp_00000.bin -bm qio -bf 40 -bz 512K -bs .text -bs .data -bs .rodata -bc -ec -eo /tmp/build3272571092677525272.tmp/sketch_may11a.cpp.elf -es .irom0.text /tmp/build3272571092677525272.tmp/sketch_may11a.cpp_10000.bin -ec 
+#
+#Sketch uses 199,232 bytes (38%) of program storage space. Maximum is 524,288 bytes.
+#
+
+
+compile.hex=${compiler.root}/tools/esptool::-eo::${build.path}/${filename}.elf::-bo::${build.path}/${filename}_00000.bin::-bm::qio::-bf::40::-bz::512K::-bs::.text::-bs::.data::-bs::.rodata::-bc::-ec::-eo::${build.path}/${filename}.elf::-es::.irom0.text::${build.path}/${filename}_10000.bin::-ec

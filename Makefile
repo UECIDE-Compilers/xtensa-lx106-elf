@@ -1,19 +1,32 @@
-ESPTOOL_LINUX64=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-linux64.zip
-ESPTOOL_LINUX32=
-ESPTOOL_OSX=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-osx.zip
-ESPTOOL_WIN32=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-win32.zip
+ESPTOOL_linux-amd64=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-linux64.zip
+ESPTOOL_darwin-amd64=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-osx.zip
+ESPTOOL_windows-amd64=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-win32.zip
+ESPTOOL_windows-i386=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-win32.zip
 
-XTENSA_OSX=http://download.igrr.me/osx-xtensa-lx106-elf.tgz
-XTENSA_LINUX32=
-XTENSA_LINUX64=http://download.igrr.me/linux64-xtensa-lx106-elf.tgz
-XTENSA_WIN32=http://download.igrr.me/win32-xtensa-lx106-elf.tgz
+XTENSA_darwin-amd64=http://download.igrr.me/osx-xtensa-lx106-elf.tgz
+XTENSA_linux-amd64=http://download.igrr.me/linux64-xtensa-lx106-elf.tgz
+XTENSA_windows-amd64=http://download.igrr.me/win32-xtensa-lx106-elf.tgz
+XTENSA_windows-i386=http://download.igrr.me/win32-xtensa-lx106-elf.tgz
 
-build-linux-amd64:
+.PHONY: build
+
+build: 
 	mkdir -p tmp
-	wget -c -O tmp/esptool-linux64.zip ${ESPTOOL_LINUX64}
-	wget -c -O tmp/xtensa-linux64.tgz ${XTENSA_LINUX64}
-	
+	wget -c -O tmp/esptool-${DEB_HOST_ARCH}.zip ${ESPTOOL_${DEB_HOST_ARCH}}
+	wget -c -O tmp/xtensa-${DEB_HOST_ARCH}.tgz ${XTENSA_${DEB_HOST_ARCH}}
+	rm -rf build
 	mkdir -p build
+	tar -C build -zxvf tmp/xtensa-${DEB_HOST_ARCH}.tgz
+	mkdir -p build/xtensa-lx106-elf/tools
+	unzip -d build/xtensa-lx106-elf/tools -j tmp/esptool-${DEB_HOST_ARCH}.zip
 
-	tar -C build -zxvf tmp/xtensa-linux64.tgz
-	unzip -d build tmp/esptool-linux64.zip
+install:
+	mkdir -p ${DESTDIR}/compilers
+	tar -C build -hcf - xtensa-lx106-elf | tar -C ${DESTDIR}/compilers -xf -
+
+
+packages:
+	dpkg-buildpackage -B -alinux-amd64
+	dpkg-buildpackage -B -awindows-amd64
+	dpkg-buildpackage -B -awindows-i386
+	dpkg-buildpackage -B -adarwin-amd64
