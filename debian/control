@@ -1,0 +1,14 @@
+Source: esp8266
+Section: cores
+XBSC-Family: esp8266
+Priority: extra
+Maintainer: Matt Jenkins <matt@majenko.co.uk>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.4
+Homepage: http://chipkit.net
+
+Package: xtensa
+Architecture: all
+Section: compilers
+Description: XTensa Compiler for the ESP8266
+
