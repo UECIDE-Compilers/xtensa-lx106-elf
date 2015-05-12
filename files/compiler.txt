@@ -61,7 +61,7 @@ asflags=-x::assembler-with-cpp::-g
 compile.c=${gcc}::-c::${source.name}::-o::${object.name}::${optimize}::${flags}::${cflags}::${core.flags}::${core.cflags}::${board.flags}::${board.cflags}::${option.flags}::${option.cflags}::${includes}::-I${core.root}/sdk/include
 compile.cpp=${gpp}::${optimize}::${flags}::${cppflags}::${core.flags}::${core.cppflags}::${board.flags}::${board.cppflags}::${option.flags}::${option.cppflags}::${includes}::-c::${source.name}::-o::${object.name}
 
-compile.S=${gcc}::-c::${source.name}::-o::${object.name}::${optimize}::${flags}::${asflags}::${core.flags}::${core.asflags}::${board.flags}::${board.asflags}::${option.flags}::${option.asflags}::${includes}
+compile.S=${gcc}::${optimize}::${flags}::${asflags}::${core.flags}::${core.asflags}::${board.flags}::${board.asflags}::${option.flags}::${option.asflags}::${includes}::-c::${source.name}::-o::${object.name}
 
 compile.link=${gpp}::${ldflags}::${core.ldflags}::${board.ldflags}::-o::${build.path}/${filename}.elf::${object.filelist}::-L::${build.path}::-L${libraries.path}::-Wl,--start-group::${libraries}::-lm::-lc::-lgcc::-lhal::-lphy::-lnet80211::-llwip::-lwpa::-lmain::-lpp::-lsmartconfig::${extra.libs}::-Wl,--end-group
 
