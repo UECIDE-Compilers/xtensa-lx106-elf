@@ -12,17 +12,18 @@ XTENSA_windows-i386=http://download.igrr.me/win32-xtensa-lx106-elf.tgz
 
 build: 
 	mkdir -p tmp
-	wget -c -O tmp/esptool-${DEB_HOST_ARCH}.zip ${ESPTOOL_${DEB_HOST_ARCH}}
-	wget -c -O tmp/xtensa-${DEB_HOST_ARCH}.tgz ${XTENSA_${DEB_HOST_ARCH}}
+	wget -q -c -O tmp/esptool-${DEB_HOST_ARCH}.zip ${ESPTOOL_${DEB_HOST_ARCH}}
+	wget -q -c -O tmp/xtensa-${DEB_HOST_ARCH}.tgz ${XTENSA_${DEB_HOST_ARCH}}
 	rm -rf build
 	mkdir -p build
-	tar -C build -zxvf tmp/xtensa-${DEB_HOST_ARCH}.tgz
+	tar -C build -zxf tmp/xtensa-${DEB_HOST_ARCH}.tgz
 	mkdir -p build/xtensa-lx106-elf/tools
 	unzip -d build/xtensa-lx106-elf/tools -j tmp/esptool-${DEB_HOST_ARCH}.zip
 
 install:
 	mkdir -p ${DESTDIR}/compilers
-	tar -C build -hcf - xtensa-lx106-elf | tar -C ${DESTDIR}/compilers -xvf -
+	cp -RL build/xtensa-lx106-elf ${DESTDIR}/compilers/
+	cp files/compiler.txt ${DESTDIR}/compilers/xtensa-lx106-elf
 
 
 packages:
