@@ -66,11 +66,4 @@ compile.S=${gcc}::${optimize}::${flags}::${asflags}::${core.flags}::${core.asfla
 compile.link=${gpp}::${ldflags}::${core.ldflags}::${board.ldflags}::-o::${build.path}/${filename}.elf::${object.filelist}::-L::${build.path}::-L${libraries.path}::-Wl,--start-group::${libraries}::-lm::-lc::-lgcc::-lhal::-lphy::-lnet80211::-llwip::-lwpa::-lmain::-lpp::-lsmartconfig::${extra.libs}::-Wl,--end-group
 
 
-#convert:
-#esptool -eo /tmp/build3272571092677525272.tmp/sketch_may11a.cpp.elf -bo /tmp/build3272571092677525272.tmp/sketch_may11a.cpp_00000.bin -bm qio -bf 40 -bz 512K -bs .text -bs .data -bs .rodata -bc -ec -eo /tmp/build3272571092677525272.tmp/sketch_may11a.cpp.elf -es .irom0.text /tmp/build3272571092677525272.tmp/sketch_may11a.cpp_10000.bin -ec 
-#
-#Sketch uses 199,232 bytes (38%) of program storage space. Maximum is 524,288 bytes.
-#
-
-
-compile.hex=${compiler.root}/tools/esptool::-eo::${build.path}/${filename}.elf::-bo::${build.path}/${filename}_00000.bin::-bm::qio::-bf::40::-bz::512K::-bs::.text::-bs::.data::-bs::.rodata::-bc::-ec::-eo::${build.path}/${filename}.elf::-es::.irom0.text::${build.path}/${filename}_10000.bin::-ec
+compile.hex=${compiler.root}/tools/esptool::-eo::${build.path}/${filename}.elf::-bo::${build.path}/${filename}_00000.bin::-bm::${build.flash_mode}::-bf::${build.flash_freq}::-bz::${build.flash_size}::-bs::.text::-bs::.data::-bs::.rodata::-bc::-ec::-eo::${build.path}/${filename}.elf::-es::.irom0.text::${build.path}/${filename}_10000.bin::-ec
