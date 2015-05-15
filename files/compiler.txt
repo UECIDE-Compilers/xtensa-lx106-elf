@@ -41,11 +41,10 @@ options.warnings.err.flags=-Wall::-Werror
 options.warnings.off.name=Suppress warnings
 options.warnings.off.flags=-w
 
-compiler.size.regex=^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(.*)\s+(.*)$
+compiler.size.regex=^\s*(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(.*)\s+(.*)$
 compiler.size.text=1
-compiler.size.rodata=2
-compiler.size.data=3
-compiler.size.bss=4
+compiler.size.data=2
+compiler.size.bss=3
 
 
 

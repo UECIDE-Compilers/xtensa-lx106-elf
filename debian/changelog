@@ -1,3 +1,33 @@
+xtensa (1.0.5) uecide; urgency=low
+
+  * Added support for menu entries
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Fri, 15 May 2015 22:22:49 +0100
+
+xtensa (1.0.4) uecide; urgency=low
+
+  * Fixed makefile lacking copy of config to package
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Wed, 13 May 2015 23:32:54 +0100
+
+xtensa (1.0.3) uecide; urgency=low
+
+  * Fixed assembly warning
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Tue, 12 May 2015 13:12:45 +0100
+
+xtensa (1.0.2) uecide; urgency=low
+
+  * Made tar verbose
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Tue, 12 May 2015 00:04:16 +0100
+
+xtensa (1.0.1) uecide; urgency=low
+
+  * Packaged ready for release
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Mon, 11 May 2015 22:52:24 +0100
+
 xtensa (1.0.0) uecide; urgency=low
 
   * Initial Import
