@@ -8,6 +8,6 @@ Standards-Version: 3.9.4
 Homepage: http://chipkit.net
 
 Package: xtensa
-Architecture: linux-amd64 windows-i386 windows-amd64 darwin-amd64
+Architecture: linux-amd64 windows-i386 windows-amd64 darwin-amd64 linux-i386
 Description: XTensa Compiler for the ESP8266
 

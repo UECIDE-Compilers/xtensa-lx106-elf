@@ -1,4 +1,5 @@
 ESPTOOL_linux-amd64=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-linux64.zip
+ESPTOOL_linux-i386=http://cdn.majenko.co.uk/esp/esptool-0.4.3-linux32.zip
 ESPTOOL_darwin-amd64=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-osx.zip
 ESPTOOL_windows-amd64=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-win32.zip
 ESPTOOL_windows-i386=https://github.com/igrr/esptool-ck/releases/download/0.4.3/esptool-0.4.3-win32.zip
@@ -7,6 +8,8 @@ XTENSA_darwin-amd64=http://download.igrr.me/osx-xtensa-lx106-elf.tgz
 XTENSA_linux-amd64=http://download.igrr.me/linux64-xtensa-lx106-elf.tgz
 XTENSA_windows-amd64=http://download.igrr.me/win32-xtensa-lx106-elf.tgz
 XTENSA_windows-i386=http://download.igrr.me/win32-xtensa-lx106-elf.tgz
+
+XTENSA_linux-i386=http://cdn.majenko.co.uk/esp/xtensa-lx106-elf-linux32.tgz
 
 .PHONY: build
 
@@ -28,6 +31,7 @@ install:
 
 packages:
 	dpkg-buildpackage -B -alinux-amd64
+	dpkg-buildpackage -B -alinux-i386
 	dpkg-buildpackage -B -awindows-amd64
 	dpkg-buildpackage -B -awindows-i386
 	dpkg-buildpackage -B -adarwin-amd64

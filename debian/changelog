@@ -1,3 +1,9 @@
+xtensa (1.0.6) uecide; urgency=low
+
+  * Fixed size command
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Fri, 15 May 2015 23:49:13 +0100
+
 xtensa (1.0.5) uecide; urgency=low
 
   * Added support for menu entries
