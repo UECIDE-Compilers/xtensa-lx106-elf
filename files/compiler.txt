@@ -49,7 +49,7 @@ compiler.size.bss=3
 
 
 
-ldflags=-nostdlib::-Wl,--no-check-sections::-Wl,-static::-Teagle.app.v6.ld
+ldflags=-nostdlib::-Wl,--no-check-sections::-Wl,-static::-T${build.ldscript}
 
 flags=-D__ets__::-DICACHE_FLASH::-U__STRICT_ANSI__::-MMD::-mlongcalls::-mtext-section-literals
 
