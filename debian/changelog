@@ -1,3 +1,27 @@
+xtensa (1.1.0) uecide; urgency=low
+
+  * Updated esptool
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Mon, 29 Jun 2015 00:54:56 +0100
+
+xtensa (1.0.9) uecide; urgency=low
+
+  * New compiler version
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Sun, 28 Jun 2015 23:37:28 +0100
+
+xtensa (1.0.8) uecide; urgency=low
+
+  * Fixed linker script for new system
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Thu, 21 May 2015 20:17:20 +0100
+
+xtensa (1.0.7) uecide; urgency=low
+
+  * Built i386 linux compiler
+
+ -- Matt Jenkins <matt@majenko.co.uk>  Mon, 18 May 2015 22:31:49 +0100
+
 xtensa (1.0.6) uecide; urgency=low
 
   * Fixed size command

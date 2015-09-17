@@ -40,8 +40,8 @@ build-linux-amd64:
 
 build-linux-i386:
 	mkdir -p tmp
-	wget -q -c -O tmp/esptool-linux-i386.tar.gz https://github.com/igrr/esptool-ck/releases/download/0.4.5/esptool-0.4.5-linux32.tar.gz
-	wget -q -c -O tmp/xtensa-linux-i386.tar.gz http://download.igrr.me/linux32-xtensa-lx106-elf-gb404fb9.tgz
+	wget -q -c -O tmp/esptool-linux-i386.tar.gz http://cdn.majenko.co.uk/esp/esptool-0.4.5-linux32.tar.gz
+	wget -q -c -O tmp/xtensa-linux-i386.tar.gz http://cdn.majenko.co.uk/esp/xtensa-lx106-elf-linux32.tgz
 	rm -rf build staging
 	mkdir -p build
 	mkdir -p staging
@@ -106,8 +106,8 @@ install:
 
 packages:
 	dpkg-buildpackage -B -alinux-amd64
-	dpkg-buildpackage -B -alinux-i386
-	dpkg-buildpackage -B -alinux-armhf
+#	dpkg-buildpackage -B -alinux-i386
+#	dpkg-buildpackage -B -alinux-armhf
 	dpkg-buildpackage -B -awindows-amd64
 	dpkg-buildpackage -B -awindows-i386
 	dpkg-buildpackage -B -adarwin-amd64
