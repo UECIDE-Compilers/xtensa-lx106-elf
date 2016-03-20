@@ -55,3 +55,8 @@ override_dh_auto_build:
 
 override_dh_auto_clean:
 	rm -rf build
+
+override_dh_auto_install:
+	mkdir -p debian/xtensa-lx106-elf/compilers/
+	cp -RL build/xtensa-lx106-elf debian/xtensa-lx106-elf/compilers/
+    cp debian/uecide/compiler.txt debian/xtensa-lx106-elf/compilers/xtensa-lx106-elf/
