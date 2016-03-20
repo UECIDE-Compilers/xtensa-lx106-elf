@@ -8,6 +8,27 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
+XTENSA_ARCH=unknown
+
+ifeq (${DEB_HOST_ARCH},linux-amd64)
+	XTENSA_ARCH=linux64
+endif
+
+ifeq (${DEB_HOST_ARCH},linux-i386)
+	XTENSA_ARCH=linux32
+endif
+
+ifeq (${DEB_HOST_ARCH},windows-i386)
+	XTENSA_ARCH=win32
+endif
+
+ifeq (${DEB_HOST_ARCH},windows-amd64)
+	XTENSA_ARCH=win32
+endif
+
+ifeq (${DEB_HOST_ARCH},darwin-amd64)
+	XTENSA_ARCH=osx
+endif
 
 %:
 	dh $@ 
@@ -20,10 +41,17 @@ override_dh_perl:
 override_dh_installdocs:
 override_dh_installchangelogs:
 override_dh_link:
-	echo OVERRIDE DH LINK!!!!
-
 override_dh_compress:
 override_dh_fixperms:
 override_dh_makeshlibs:
 override_dh_shlibdeps:
 
+override_dh_auto_build:
+	wget -c https://raw.githubusercontent.com/esp8266/Arduino/master/package/package_esp8266com_index.template.json
+	rm -rf build
+	mkdir -p build
+	grep '"url": ".*/${XTENSA_ARCH}-xtensa-lx106-elf' package_esp8266com_index.template.json | awk '{print $$2}' | cut -f2 -d'"' | sort | uniq | wget -c -i -
+	tar -C build -zxf `grep '"archiveFileName": "${XTENSA_ARCH}-xtensa-lx106-elf' package_esp8266com_index.template.json | awk '{print $$2}' | cut -f2 -d'"' | sort -r | uniq | head -n 1`
+
+override_dh_auto_clean:
+	rm -rf build

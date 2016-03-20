@@ -62,7 +62,7 @@ compile.cpp=${gpp}::${optimize}::${flags}::${cppflags}::${core.flags}::${core.cp
 
 compile.S=${gcc}::${optimize}::${flags}::${asflags}::${core.flags}::${core.asflags}::${board.flags}::${board.asflags}::${option.flags}::${option.asflags}::${includes}::-c::${source.name}::-o::${object.name}
 
-compile.link=${gpp}::${ldflags}::${core.ldflags}::${board.ldflags}::-o::${build.path}/${filename}.elf::${object.filelist}::-L::${build.path}::-L${libraries.path}::-Wl,--start-group::${libraries}::-lm::-lc::-lgcc::-lhal::-lphy::-lnet80211::-llwip::-lwpa::-lmain::-lpp::-lsmartconfig::${extra.libs}::-Wl,--end-group
+compile.link=${gpp}::${ldflags}::${core.ldflags}::${board.ldflags}::-o::${build.path}/${filename}.elf::${object.filelist}::-L::${build.path}::-L${libraries.path}::-Wl,--start-group::${libraries}::-lm::-lc::-lgcc::${core.libs}::${extra.libs}::-Wl,--end-group
 
 
 compile.hex=${compiler.root}/tools/esptool::-eo::${build.path}/${filename}.elf::-bo::${build.path}/${filename}_00000.bin::-bm::${build.flash_mode}::-bf::${build.flash_freq}::-bz::${build.flash_size}::-bs::.text::-bs::.data::-bs::.rodata::-bc::-ec::-eo::${build.path}/${filename}.elf::-es::.irom0.text::${build.path}/${filename}_10000.bin::-ec
