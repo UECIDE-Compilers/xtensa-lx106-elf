@@ -1,4 +1,4 @@
-Source: xtensa
+Source: xtensa-lx106-elf
 Section: compilers
 XBSC-Family: esp8266
 Priority: extra
@@ -7,7 +7,8 @@ Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.4
 Homepage: http://chipkit.net
 
-Package: xtensa
+Package: xtensa-lx106-elf
+XBSC-Group: ESP8266
 Architecture: any
 Description: XTensa Compiler for the ESP8266
 
