@@ -8,10 +8,10 @@ optimize=-Os
 warnings=
 extra.flags=
 
-cflags=-G1024::-g::-O2::${warnings}::-ffunction-sections::-fdata-sections::-mno-smart-io::-mdebugger::-Wcast-align::-fno-short-double::${extra.flags}
-cppflags=-G1024::-g::-O2::${warnings}::-fno-exceptions::-ffunction-sections::-fdata-sections::-mno-smart-io::-mdebugger::-Wcast-align::-fno-short-double::${extra.flags}
+cflags=-G1024::-g::${warnings}::-ffunction-sections::-fdata-sections::-mno-smart-io::-mdebugger::-Wcast-align::-fno-short-double::${extra.flags}
+cppflags=-G1024::-g::${warnings}::-fno-exceptions::-ffunction-sections::-fdata-sections::-mno-smart-io::-mdebugger::-Wcast-align::-fno-short-double::${extra.flags}
 ldflags=${optimize}::-Wl,--gc-sections,-Map,${filename}.map::-mdebugger::-mno-peripheral-libs::-nostartfiles::${extra.flags}
-asflags=-O2::-g1::-Wa,--gdwarf-2::${warnings}::${extra.flags}
+asflags=-g1::-Wa,--gdwarf-2::${warnings}::${extra.flags}
 
 gcc=${compiler.root}/bin/xtensa-lx106-elf-gcc
 gpp=${compiler.root}/bin/xtensa-lx106-elf-g++
@@ -49,15 +49,16 @@ compiler.size.bss=3
 
 
 
-ldflags=-nostdlib::-Wl,--no-check-sections::-Wl,-static::-T${build.ldscript}
+ldflags=-nostdlib::-Wl,--no-check-sections::-Wl,-static::-T${build.ldscript}::-Wl,--gc-sections
 
-flags=-D__ets__::-DICACHE_FLASH::-U__STRICT_ANSI__::-MMD::-mlongcalls::-mtext-section-literals
+flags=-g::-mtext-section-literals
 
 cflags=-std=c99::-Wl,-El::-fno-inline-functions::-nostdlib::-Wpointer-arith::-Wno-implicit-function-declaration
 cppflags=-fno-rtti::-fno-exceptions::-std=c++11::
 asflags=-x::assembler-with-cpp::-g
 
 compile.c=${gcc}::-c::${source.name}::-o::${object.name}::${optimize}::${flags}::${cflags}::${core.flags}::${core.cflags}::${board.flags}::${board.cflags}::${option.flags}::${option.cflags}::${includes}::-I${core.root}/sdk/include
+
 compile.cpp=${gpp}::${optimize}::${flags}::${cppflags}::${core.flags}::${core.cppflags}::${board.flags}::${board.cppflags}::${option.flags}::${option.cppflags}::${includes}::-c::${source.name}::-o::${object.name}
 
 compile.S=${gcc}::${optimize}::${flags}::${asflags}::${core.flags}::${core.asflags}::${board.flags}::${board.asflags}::${option.flags}::${option.asflags}::${includes}::-c::${source.name}::-o::${object.name}
