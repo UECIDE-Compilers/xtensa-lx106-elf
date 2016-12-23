@@ -21,6 +21,16 @@ objdump=${compiler.root}/bin/xtensa-lx106-elf-objdump
 size=${compiler.root}/bin/xtensa-lx106-elf-size
 binhex=${compiler.root}/bin/xtensa-lx106-elf-bin2hex
 
+esptool=${compiler.root}/tools/esptool
+
+compile.autogen.lss=__builtin_stdin::${build.path}/${filename}.lss::${objdump}::-h::-S::${build.path}/${filename}.elf
+#compile.autogen.hex=${binhex}::-a::${build.path}/${filename}.elf
+compile.autogen.etx=__builtin_stdin::${build.path}/${filename}.etx::${objdump}::-t::${build.path}/${filename}.elf
+compile.autogen.eep=${objcopy}::-O::ihex::-j::.eeprom::--set-section-flags=.eeprom=alloc,load::--no-change-warnings::--change-section-lma::.eeprom=0::${build.path}/${filename}.elf::${build.path}/${filename}.eep
+
+compile.autogen.bin=${esptool}::-eo::${build.path}/${filename}.elf::-bo::${build.path}/${filename}_00000.bin::-bm::${build.flash_mode}::-bf::${build.flash_freq}::-bz::${build.flash_size}::-bs::.text::-bs::.data::-bs::.rodata::-bc::-ec::-eo::${build.path}/${filename}.elf::-es::.irom0.text::${build.path}/${filename}_10000.bin::-ec
+
+
 exe.extension=.elf
 
 
@@ -29,7 +39,7 @@ compile.lss=${objdump}::-h::-S::${build.path}/${filename}.elf
 compile.size=${size}::${build.path}/${filename}.elf
 
 
-compiler.error=^(.+):(\d+):\d+: error: (.*)
+compiler.error=^(.+):(\d+):\d+: .*error: (.*)
 compiler.warning=^(.+):(\d+):\d+: warning: (.*)
 
 options.warnings.name=Warnings
@@ -65,5 +75,5 @@ compile.S=${gcc}::${optimize}::${flags}::${asflags}::${core.flags}::${core.asfla
 
 compile.link=${gpp}::${ldflags}::${core.ldflags}::${board.ldflags}::-o::${build.path}/${filename}.elf::${object.filelist}::-L::${build.path}::-L${libraries.path}::-Wl,--start-group::${libraries}::-lm::-lc::-lgcc::${core.libs}::${extra.libs}::-Wl,--end-group
 
-
 compile.hex=${compiler.root}/tools/esptool::-eo::${build.path}/${filename}.elf::-bo::${build.path}/${filename}_00000.bin::-bm::${build.flash_mode}::-bf::${build.flash_freq}::-bz::${build.flash_size}::-bs::.text::-bs::.data::-bs::.rodata::-bc::-ec::-eo::${build.path}/${filename}.elf::-es::.irom0.text::${build.path}/${filename}_10000.bin::-ec
+
